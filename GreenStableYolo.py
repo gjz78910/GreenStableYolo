@@ -184,7 +184,7 @@ def text2img(prompt, configuration={}):
     ).images
     ender.record()
     torch.cuda.synchronize()
-    inference_time = starter.elapsed_time(ender) # compute inference time in minutes
+    inference_time = starter.elapsed_time(ender) # compute inference time in milliseconds
 
     # print(inference_time)
     # print(imagesAll)
@@ -244,7 +244,7 @@ class NSGA2Optimizer:
 
     def createElem(self):
         param_ranges_dict = {
-            "num_inference_steps": random.randint(1, 100),  # Number of denoising steps
+            "num_inference_steps": random.randint(0, 100),  # Number of denoising steps
             "guidance_scale": 20
             * random.uniform(0, 1),  # Scale for classifier-free guidance
             "negative_prompt": random.randint(1, 2**9),
@@ -336,8 +336,8 @@ class NSGA2Optimizer:
         # the top ten individuals are printed
         # topTen = tools.selBest(population, k=10)
         # print(topTen)
-        best = tools.selBest(population, k=1)
-        return best[0], offspring, logbook, pareto_front[0]
+        # best = tools.selBest(population, k=1)
+        return offspring, logbook, pareto_front[0]
 
     def get_caption_similarity(self, text_a, text_b):
         texts = [text_a, text_b]
@@ -384,7 +384,7 @@ class NSGA2Optimizer:
 
 
 
-n_experiments = 10
+n_experiments = 15
 prompt = "Two people and a bus"
 
 configuration = {
@@ -397,7 +397,7 @@ configuration = {
     "inner_mut_prob": 0.2,
     "population_size": 25,
     "tournament_sel": 5,
-    "weights": (1.0, -1.0),
+    "weights": (0.001, -1000),
     "prompt": prompt,
 }
 
@@ -410,16 +410,13 @@ for ne in range(n_experiments):
     print("\n - Running NSGA2...")
     gen = NSGA2Optimizer(configuration)
 
-    sol, offspring, logbook, pareto_front = gen.optimize()
+    offspring, logbook, pareto_front = gen.optimize()
     print("\n - Logs")
     print(logbook)
     print("\n - Last Generation: ")
     for ind in offspring:
         print(ind)
         print(ind.fitness.values)
-    print("\n - Best individual")
-    print(sol)
-    print(sol.fitness.values)
     print("\n - Pareto front")
     for ind in pareto_front:
         print(ind)
@@ -430,7 +427,7 @@ for ne in range(n_experiments):
         # Create a CSV writer object
         writer = csv.writer(csvfile)
         # Write the dictionary string to the CSV file
-        writer.writerow([ne+1, sol] + [ind for ind in pareto_front])
-        writer.writerow([ne+1, sol.fitness.values] + [ind.fitness.values for ind in pareto_front])
+        writer.writerow([ne+1] + [ind for ind in pareto_front])
+        writer.writerow([ne+1] + [ind.fitness.values for ind in pareto_front])
 
     print("\n - Done.")

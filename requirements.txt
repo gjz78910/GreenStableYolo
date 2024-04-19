@@ -1,0 +1,12 @@
+beautifulsoup4==4.12.3
+deap==1.4.1
+diffusers==0.27.1
+numpy==1.24.3
+opencv_python==4.6.0.66
+pandas==1.4.1
+Pillow==10.3.0
+requests==2.31.0
+schedule==1.2.1
+scipy==1.13.0
+torch==2.0.0
+ultralytics==8.1.29
