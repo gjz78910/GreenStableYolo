@@ -34,4 +34,4 @@ the codes have been tested with **Python 3.6 - 3.9**, other versions might cause
 
     Edit line 388 prompt = "Two people and a bus" to test with different prompts.
 
-    Edit lines 390-400 to change the hyperparameters of NSGA-II.
+    Edit lines 390-400 to change the hyperparameters for NSGA-II.
