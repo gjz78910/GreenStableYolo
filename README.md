@@ -2,7 +2,7 @@
 
 This repository contains the **source codes** and **raw experiment results** for the paper.
 
->**Abstract:** Tuning the parameters and prompts for improving AI-based image generation systems has been a substantial yet unaddressed challenge. To mitigate this issue, this study introduces Green StableYolo, a novel approach that leverages NSGA-II to optimize the parameters and prompts for Stable Diffusion, aiming to enhance both GPU inference time and quality of the generated images, as assessed by Yolo. Experimental results demonstrate that while having a relatively small impact (18%) on image quality compared to the baseline StableYolo method, Green StableYolo achieves a substantial reduction in inference time (266% less) and a 526% higher hypervolume, thereby advancing the state-of-the-art in multi-objective optimization for text-to-image generation.
+>**Abstract:** Tuning the parameters and prompts for improving AI-based image generation systems has been a substantial yet unaddressed challenge. Hence we introduce Green StableYolo, which improves the parameters and prompts for stability.ai’s deep learning Stable Diffusion using NSGA-II and Yolo to both reduce GPU inference time and increase quality of the generated images. Our experiments show that despite a relatively slight trade-off (18%) in image quality compared to the baseline StableYolo (which only considers image quality), Green StableYolo achieves a substantial reduction in inference time (266% less) and a 526% higher hypervolume, thereby advancing the state-of-the-art in multi-objective optimization for text-to-image.
 
 # Documents
 - **results**:
